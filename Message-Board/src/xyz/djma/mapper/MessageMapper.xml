@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.djma.mapper.MessageMapper">
+    <resultMap id="MessageMap" type="Message">
+        <id property="id" column="message_id"/>
+        <result property="title" column="message_title"/>
+        <result property="content" column="message_content"/>
+        <result property="datetime" column="message_datetime"/>
+        <result property="userId" column="message_user_id"/>
+        <collection property="replies" ofType="Reply">
+            <id property="id" column="reply_id"/>
+            <result property="content" column="reply_content"/>
+            <result property="datetime" column="reply_datetime"/>
+            <result property="userId" column="reply_user_id"/>
+            <result property="messageId" column="reply_message_id"/>
+        </collection>
+    </resultMap>
+
+    <select id="getAllMessage" resultMap="MessageMap">
+        select m.id message_id, m.title message_title, m.content message_content,
+        m.datetime message_datetime, m.user_id message_user_id, r.id reply_id,
+        r.content reply_content, r.datetime reply_datetime, r.user_id reply_user_id,
+        r.message_id reply_message_id from message m inner join reply r on r.message_id = m.id
+    </select>
+</mapper>
