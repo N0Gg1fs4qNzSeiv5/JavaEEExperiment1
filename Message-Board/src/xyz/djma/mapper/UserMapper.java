@@ -30,4 +30,11 @@ public interface UserMapper {
      * @return User
      */
     User getUserById(@Param("id") int id);
+
+    /**
+     * 根据用户名获取用户信息
+     * @param username 用户名
+     * @return User
+     */
+    User getUserByUsername(@Param("username") String username);
 }

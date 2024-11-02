@@ -20,4 +20,11 @@ public interface UserService {
      * @return Result
      */
     Result login(User user);
+
+    /**
+     * 根据id获取用户信息
+     * @param id id
+     * @return Result
+     */
+    Result getUserById(int id);
 }

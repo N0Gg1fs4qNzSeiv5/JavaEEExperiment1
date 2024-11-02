@@ -39,7 +39,10 @@
     </select>
 
     <select id="getUserById" resultMap="UserMap">
-        select id user_id, username user_username, password user_password
-        where id = #{id}
+        select id user_id, username user_username from user where id = #{id}
+    </select>
+
+    <select id="getUserByUsername" resultType="User">
+        select id, username from user where username = #{username}
     </select>
 </mapper>

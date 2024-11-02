@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import xyz.djma.pojo.Result;
 import xyz.djma.pojo.User;
 import xyz.djma.service.UserService;
@@ -33,12 +34,18 @@ public class LoginController extends HttpServlet {
         user.setUsername(map.get("username"));
         user.setPassword(map.get("password"));
         UserService userService = new UserServiceImpl();
-        Result resul = userService.login(user);
+        Result result = userService.login(user);
+
+        // 设置session
+        if (result.getCode() == 1) {
+            HttpSession session = req.getSession();
+            session.setAttribute("userId", String.valueOf(((Integer) result.getData()).intValue()));
+        }
 
         // 设置响应
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        String json = gson.toJson(resul);
+        String json = gson.toJson(result);
         resp.getWriter().write(json);
     }
 }

@@ -10,6 +10,7 @@ import xyz.djma.pojo.Result;
 import xyz.djma.pojo.User;
 import xyz.djma.service.UserService;
 import xyz.djma.service.impl.UserServiceImpl;
+import xyz.djma.util.ServletUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 读取参数
-        String param = req.getParameter("username");
+        String param = ServletUtil.getHttpServletRequestFromJson(req);
 
         // 调用Service
         Gson gson = new Gson();

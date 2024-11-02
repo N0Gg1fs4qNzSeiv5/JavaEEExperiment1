@@ -10,4 +10,9 @@
         <result property="userId" column="reply_user_id"/>
         <result property="messageId" column="reply_message_id"/>
     </resultMap>
+
+    <insert id="addReply" parameterType="Reply">
+        insert into reply(content, datetime, user_id, message_id)
+        values(#{content}, #{datetime}, #{userId}, #{messageId})
+    </insert>
 </mapper>

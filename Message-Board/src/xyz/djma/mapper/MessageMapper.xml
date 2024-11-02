@@ -22,6 +22,11 @@
         select m.id message_id, m.title message_title, m.content message_content,
         m.datetime message_datetime, m.user_id message_user_id, r.id reply_id,
         r.content reply_content, r.datetime reply_datetime, r.user_id reply_user_id,
-        r.message_id reply_message_id from message m inner join reply r on r.message_id = m.id
+        r.message_id reply_message_id from message m left join reply r on r.message_id = m.id
     </select>
+
+    <insert id="addMessage" parameterType="Message">
+        insert into message(title, content, datetime, user_id)
+        values(#{title}, #{content}, #{datetime}, #{userId})
+    </insert>
 </mapper>

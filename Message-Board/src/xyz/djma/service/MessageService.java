@@ -14,4 +14,11 @@ public interface MessageService {
      * @return List
      */
     Result getAllMessage();
+
+    /**
+     * 添加留言
+     * @param message Message对象
+     * @return Result
+     */
+    Result addMessage(Message message);
 }
